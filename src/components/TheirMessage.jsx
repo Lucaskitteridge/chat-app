@@ -1,30 +1,30 @@
-const TheirMessage = ({ message, lastMessage }) => {
+const TheirMessage = ({ lastMessage, message }) => {
+  const isFirstMessageByUser = !lastMessage || lastMessage.sender.username !== message.sender.username;
 
-  const isFirstMessage = !lastMessage || lastMessage.sender.userName !== message.sender.userName
   return (
-    <div className='message-room'>
-      {isFirstMessage && (
+    <div className="message-row">
+      {isFirstMessageByUser && (
         <div
           className="message-avatar"
-          style={{ backgroundImage: `url(${message?.sender?.avatar})` }}
+          style={{ backgroundImage: message.sender && `url(${message.sender.avatar})` }}
         />
       )}
-      {message?.attachments.length > 0
+      {message.attachments && message.attachments.length > 0
         ? (
           <img
             src={message.attachments[0].file}
-            alt='message_attachment'
-            className='message-img'
-            styles={{ marginLeft: isFirstMessage ? '4px' : '48px' }}
+            alt="message-attachment"
+            className="message-image"
+            style={{ marginLeft: isFirstMessageByUser ? '4px' : '48px' }}
           />
-        ) : (
-          <div className='message' style={{ float: 'left', backgroundColor: '#CABCDC', marginLeft: isFirstMessage ? '4px' : '48px'  }}>
+        )
+        : (
+          <div className="message" style={{ float: 'left', backgroundColor: '#CABCDC', marginLeft: isFirstMessageByUser ? '4px' : '48px' }}>
             {message.text}
           </div>
-        )
-      }
+        )}
     </div>
-  )
-}
+  );
+};
 
-export default TheirMessage 
+export default TheirMessage;
