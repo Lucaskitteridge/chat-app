@@ -2,10 +2,10 @@ const TheirMessage = ({ message, lastMessage }) => {
 
   const isFirstMessage = !lastMessage || lastMessage.sender.userName !== message.sender.userName
   return (
-    <div className='messageRoom'>
+    <div className='message-room'>
       {isFirstMessage && (
         <div
-          className="messageAvatar"
+          className="message-avatar"
           style={{ backgroundImage: `url(${message?.sender?.avatar})` }}
         />
       )}
@@ -14,7 +14,7 @@ const TheirMessage = ({ message, lastMessage }) => {
           <img
             src={message.attachments[0].file}
             alt='message_attachment'
-            className='messageimg'
+            className='message-img'
             styles={{ marginLeft: isFirstMessage ? '4px' : '48px' }}
           />
         ) : (
