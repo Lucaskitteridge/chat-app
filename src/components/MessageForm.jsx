@@ -7,6 +7,14 @@ const MessageForm = (props) => {
   const [value, setValue] = useState('')
   const {chatId , creds } = props
 
+  const renderReadReceipts = (message, isMyMessage) => {
+    return chatId.people.map((person, index) => {
+      person.last_read === message.id && (
+        <div key={`read_${index}`} className='read-receipt' style={{flaot: isMyMessage ? 'right' : 'left', backgroundImage: `url(${person.person.avatar})`}} />
+      )
+    })
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
